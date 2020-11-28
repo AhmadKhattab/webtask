@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head> 
+        <title>Contacts App</title>
+        <meta name="viewport" content="width=device-width,initialscale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"> </script>
+        <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"> </script> 
+		
+		<style>
+			
+				.popphoto{border: solid 1px #DDD;padding: 5px;box-shadow: 5px 5px #ABC;border-radius: 8px;}
+				.centerlized{text-align:center;width: 800px;margin: auto}
+				.lalign{text-align: left;margin-left: 243px}
+				.lalign p{font-size: 13px;}
+				.manage{margin-top: 20px;}
+		</style>
+		
+		
+		
+    </head>
+		
+	<body>
+		
+			
+		
+		<section data-role="page" id="firstPage">
+			
+			<header data-role="header">
+				<a href="#addContact" data-role = "button" data-transition="slideup" data-icon="plus">Add</a>
+
+				<h1> Contact List To Be Shown</h1>
+			</header>
+			
+			
+			<article data-role="content">
+				<ul id="contactList" data-role="listview" data-filter="true" data-split-icon="phone"  data-filter-placeholder="Search contacts..." data-filter-theme="c" data-inset="true">
+					
+					<!--
+					<li>
+						<a href="#contactInfo">
+							<img src="contact.png">
+							<h2>Ahmad Khattab</h2>
+						</a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+					
+					<li>
+						<a href="#contactInfo">
+							<img src="contact.png">
+							<h2>Asser Saeed</h2>
+						</a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+					
+					<li>
+						<a href="#contactInfo">
+							<img src="contact.png">
+							<h2>Mahmound Elna3na3i</h2>
+						</a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+					-->
+				</ul>
+			</article>
+			
+			<footer data-role="footer">
+				<h1> Contact List</h1>
+			</footer>
+			
+		</section>
+	
+		<section data-role="page" id="addContact">
+		
+			<header data-role="header">
+				<a href="#firstPage" data-role = "button" data-icon="back" data-transition="slideup">Back</a>
+				<h1> New Contact</h1>
+			</header>
+			
+			<article data-role="content">
+			
+				<div class="ui-field-contain">
+					<label for="textinput-fc">Name:</label>
+					<input type="text" name="textinput-fc" id="textinput-fc" placeholder="enter contact name" value="" class="name">
+				</div>
+				
+				<div class="ui-field-contain">
+					<label for="textinput-fc">Phone:</label>
+					<input type="number" name="textinput-fc" id="textinput-fc" placeholder="enter contact phone number" value="" class="phone">
+				</div>
+				
+				<div class="ui-field-contain">
+					<label for="textinput-fc">E-mail:</label>
+					<input type="email" name="textinput-fc" id="textinput-fc" placeholder="enter contact email" value="" class="email">
+				</div>
+				
+				<div class="ui-field-contain">
+					<label for="slider2">Gender:</label>
+					<select name="slider2" id="slider2" data-role="slider">
+	    				<option value="Male">Male</option>
+	    				<option value="Female">Female</option>
+					</select>
+				</div>
+				
+				
+				<a href="#firstPage"><input type="button" data-inline="true" data-icon="check" value="Save" onClick="addContact()"></a>
+					
+				<input type="button" data-inline="true" data-icon="delete" value="Cancel">
+				
+			</article>
+			
+			<footer data-role="footer">
+				<h1>Contact List</h1>
+			</footer>
+		
+		
+		
+		</section>
+		
+		
+		<section id="contactInfo" data-role="page">
+		
+		
+			<header data-role="header">
+				<a href="#firstPage" data-role = "button" data-icon="back" data-transition="slideup">Back</a>
+				<h1 id="headContactName"></h1>
+			</header>
+			
+			<article data-role="content">
+				<div class="centerlized">
+					<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="dark.jpeg" alt="Ahmad Khattab" style="width:300px;height: 300px"></a>
+					<div data-role="popup" id="popupParis" data-overlay-theme="b" data-theme="b" data-corners="false">
+						<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img class="popphoto" src="dark.jpeg" style="max-height:512px;" alt="Paris, France">
+					</div>
+					
+					<div class="lalign">
+						<h3 id="contactInfoPhone"></h3>
+						<p>Mobile</p>
+					</div>
+					
+					<div class="lalign">
+						<h3 id="contactInfoEmail"></h3>
+						<p>Email</p>
+					</div>
+				
+					<div class="manage">
+						<a href="#editContact"  data-position-to="window"  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-edit ui-btn-icon-left ui-btn-c" data-icon="edit" onclick="displayEditContact()">Edit</a>
+						
+						<!--<input type="button" data-inline="true" data-icon="delete" value="" onclick="deleteContact()">-->
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-c" data-icon="delete">Delete</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+						    <div data-role="header" data-theme="a">
+						    	<h1>Delete Contact?</h1>
+						    </div>
+						    <div role="main" class="ui-content">
+						        <h3 class="ui-title">Are you sure you want to delete this contact?</h3>
+						    	<p>This action cannot be undone.</p>
+						        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-c" data-rel="back">Cancel</a>
+						        <a href="#firstPage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-c" data-transition="flow" onclick="deleteContact()">Delete</a>
+						    </div>
+						</div>
+						
+						<a href="#"  data-position-to="window"  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-phone ui-btn-icon-left ui-btn-c">Dial</a>
+						
+							
+						
+					</div>
+				
+				</div>
+			
+			</article>
+			
+			<footer data-role="footer">
+				
+				<h1>Contact List</h1>
+			
+			</footer>
+		
+		</section>
+		
+		<section data-role="page" id="editContact">
+		
+			<header data-role="header">
+				<a href="#firstPage" data-role = "button" data-icon="back" data-transition="slideup">Back</a>
+				<h1> Edit Contact </h1>
+			</header>
+			
+			<article data-role="content">
+			
+				<div class="ui-field-contain">
+					<label for="textinput-fc">Name:</label>
+					<input type="text" name="textinput-fc" id="textinput-fc" placeholder="enter contact name" value="">
+				</div>
+				
+				<div class="ui-field-contain">
+					<label for="textinput-fc">Phone:</label>
+					<input type="number" name="textinput-fc" id="textinput-fc" placeholder="enter contact phone number" value="">
+				</div>
+				
+				<div class="ui-field-contain">
+					<label for="textinput-fc">E-mail:</label>
+					<input type="email" name="textinput-fc" id="textinput-fc" placeholder="enter contact email" value="">
+				</div>
+				
+				<div class="ui-field-contain">
+					<label for="edSlider2">Gender:</label>
+					<select name="edSlider2" id="slider2" data-role="slider">
+	    				<option value="Male">Male</option>
+	    				<option value="Female">Female</option>
+					</select>
+				</div>
+				
+				
+				<a href="#firstPage"><input type="button" data-inline="true" data-icon="check" value="Save" onClick="editContact()"></a>
+					
+				<a href="#firstPage"><input type="button" data-inline="true" data-icon="delete" value="Cancel"></a>
+				
+			</article>
+			
+			<footer data-role="footer">
+				<h1>Contact List</h1>
+			</footer>
+		
+		
+		
+		</section>
+		
+		
+		<script>
+			
+			class Contact{
+				
+					constructor(name, phone, email, gender){
+					
+						this.name = name;
+						
+						this.phone = phone;
+						
+						this.email = email;
+						
+						this.gender = gender;
+						
+					}
+				
+				
+				}
+				
+				
+				
+				contactList = [];
+				
+				var contactInfo = document.getElementsByName('textinput-fc');
+				
+				var gender = document.getElementById('slider2');
+
+				
+				function addContact(){
+
+					
+					var newContact = new Contact(contactInfo[0].value, contactInfo[1].value, contactInfo[2].value, gender.value);
+					
+					contactList.push(newContact);
+										
+					/*
+					var li = document.createElement("LI"); 
+					
+					li.className ="ui-li-has-alt ui-li-has-thumb ui-last-child";
+					
+					var anchor = document.createElement("A");
+					
+					var anchor2 = document.createElement("A");
+					
+					anchor2.href="#purchase";
+					
+					
+					
+					var rawText = document.createTextNode("Mostafa");
+					
+					var contactName = document.createElement("H2");
+					
+					contactName.appendChild(rawText);
+					
+					var contactImg = document.createElement("IMG");
+					
+					contactImg.src = "contact.png";
+					
+					anchor.href = "#contactInfo";
+					
+					anchor.className = "ui-btn";
+					
+					anchor.appendChild(contactImg);
+					
+					anchor.appendChild(contactName);
+
+					li.appendChild(anchor);
+					
+					li.appendChild(anchor2);
+
+					document.getElementById('contactList').appendChild(li);
+					*/
+					
+					var idName = newContact.name.replace(/\s/g, '');
+					
+					$("ul").append('<li id='+idName+' class='+idName+'><a href="#contactInfo" id='+idName+' onclick=displayContactInfo(this)'+'><img src="contact.png"><h2 class='+idName+'>'+newContact.name+'</h2><p class='+idName+'>'+newContact.phone+'</p></a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a></li>').listview('refresh');
+					
+					
+					
+
+				}
+				
+				
+				function searchForContact(contactId){
+				
+						index = -1;
+						
+						
+						for( i = 0;i < contactList.length&&index==-1;i++){
+							
+							if(contactList[i].name.replace(/\s/g, '') == contactId){
+								index = i;
+							
+							}
+						}
+						
+						
+						
+						return index;
+				
+				}
+
+				function displayContactInfo(element){
+					
+					var contactId = element.id;
+					
+					
+					
+					var index = searchForContact(contactId, contactList);
+					
+					
+					
+					if(index > -1){
+					
+						var contactName = contactList[index].name;
+						
+						var contactPhone = contactList[index].phone;
+						
+						var contactEmail = contactList[index].email;
+					
+						document.getElementById('headContactName').innerHTML = contactName;
+						
+						document.getElementById('contactInfoPhone').innerHTML = contactPhone;
+						
+						document.getElementById('contactInfoEmail').innerHTML = contactEmail;
+
+
+						
+					
+					}
+					
+					
+				
+				}
+				
+				
+				function deleteContact(){
+				
+					
+					var nameOfRemovedContact = contactList[index].name;
+					
+					var idOfRemovedContact = nameOfRemovedContact.replace(/\s/g, '');
+					
+					var removedContact = document.getElementById(idOfRemovedContact);
+					
+					var parentNode = document.getElementById('contactList');
+					
+					//contactList.splice(index, index+1);
+					
+					parentNode.removeChild(removedContact);
+					
+					console.log(contactList);
+					
+				
+					
+				
+				
+				}
+				
+				function displayEditContact(){
+				
+					//console.log(index);
+					
+					
+					
+					
+					var contactName = contactList[index].name;
+				
+					var contactPhone = contactList[index].phone;
+						
+					var contactEmail = contactList[index].email;
+					
+					var contactGender = contactList[index].gender;
+					
+					console.log(contactName);
+					
+					var inputObjs = document.getElementsByName('textinput-fc');
+					
+					var genderObj = document.getElementsByName('edSlider2')[0];
+					
+					inputObjs[3].value = contactName;
+					
+					inputObjs[4].value = contactPhone;
+					
+					inputObjs[5].value = contactEmail;
+					
+					genderObj.value = contactGender;
+					
+					console.log(genderObj.value);
+					
+					//edName.value = contactList[index].name;
+						
+					
+
+				
+				}
+				
+				function editContact(){
+				
+					var contactId = contactList[index].name.replace(/\s/g, '');
+										
+					var inputObjs = document.getElementsByName('textinput-fc');
+					
+					var genderObj = document.getElementsByName('edSlider2')[0];
+					
+					contactList[index].name = inputObjs[3].value;
+				
+					contactList[index].phone = inputObjs[4].value;
+						
+					contactList[index].email = inputObjs[5].value;
+					
+					contactList[index].gender = genderObj.value;
+									
+					var newContactId = contactList[index].name.replace(/\s/g, '');
+				
+					document.getElementById(contactId).className = newContactId;
+					
+					document.getElementById(contactId).id = newContactId;
+					
+					document.getElementById(contactId).id = newContactId;
+					
+					var changedInfo = document.getElementsByClassName(contactId);
+					
+					console.log(changedInfo);
+					
+					changedInfo[0].innerHTML = contactList[index].name;
+					
+					changedInfo[1].innerHTML = contactList[index].phone;
+					
+					var h2 = changedInfo[0];
+					
+					var p = changedInfo[1];
+					
+					p.className = newContactId;
+					
+					changedInfo[0].className = newContactId;
+					
+					var edContact = document.getElementById(newContactId);
+					edContact.classList.add("ui-li-has-alt");
+					edContact.classList.add("ui-li-has-thumb");
+					edContact.classList.add("ui-first-child");
+					edContact.classList.add("ui-last-child");
+					
+					//changedInfo[1].className = newContactId;
+					
+					//$(selector1).val(contactList[index].name);
+					
+					//$(selector2).val(contactList[index].phone);
+					
+				
+				//$("ul").append('<li id='+idName+' class='+idName+'><a href="#contactInfo" id='+idName+' onclick=displayContactInfo(this)'+'><img src="contact.png"><h2 class='+idName+'>'+newContact.name+'</h2><p class='+idName+'>'+newContact.phone+'</p></a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a></li>').listview('refresh');
+					
+				//AhmadKhattab ui-li-has-alt ui-li-has-thumb ui-first-child ui-last-child
+				
+				
+				}
+				
+				
+				function display(){
+				
+					alert('Hello');
+				}
+				
+				function login(){
+				
+					alert("Module 1");
+				}
+		</script>
+	</body>
+
+
+
+
+
+
+
+
+
+</html>
